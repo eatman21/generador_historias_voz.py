@@ -123,6 +123,88 @@ class GeneradorHistorias:
         else:
             print("Índice de voz no válido")
 
+    def crear_historia_personalizada(self):
+        """Permite al usuario crear su propia historia"""
+        print("\n📝 Creando tu historia personalizada...")
+        print("\nPuedes elegir de las opciones disponibles o escribir tu propia idea.")
+
+        # Mostrar opciones disponibles para cada elemento
+        print("\nPersonajes disponibles:")
+        for i, personaje in enumerate(self.personajes, 1):
+            print(f"{i}. {personaje}")
+        print("0. Escribir mi propio personaje")
+
+        opcion = input("\nElige un número o escribe tu personaje: ").strip()
+        if opcion.isdigit() and 1 <= int(opcion) <= len(self.personajes):
+            personaje = self.personajes[int(opcion)-1]
+        else:
+            personaje = opcion if opcion != "0" else input(
+                "Escribe tu personaje: ").strip()
+
+        print("\nLugares disponibles:")
+        for i, lugar in enumerate(self.lugares, 1):
+            print(f"{i}. {lugar}")
+        print("0. Escribir mi propio lugar")
+
+        opcion = input("\nElige un número o escribe tu lugar: ").strip()
+        if opcion.isdigit() and 1 <= int(opcion) <= len(self.lugares):
+            lugar = self.lugares[int(opcion)-1]
+        else:
+            lugar = opcion if opcion != "0" else input(
+                "Escribe tu lugar: ").strip()
+
+        print("\nObjetos mágicos disponibles:")
+        for i, objeto in enumerate(self.objetos_magicos, 1):
+            print(f"{i}. {objeto}")
+        print("0. Escribir mi propio objeto")
+
+        opcion = input("\nElige un número o escribe tu objeto: ").strip()
+        if opcion.isdigit() and 1 <= int(opcion) <= len(self.objetos_magicos):
+            objeto = self.objetos_magicos[int(opcion)-1]
+        else:
+            objeto = opcion if opcion != "0" else input(
+                "Escribe tu objeto: ").strip()
+
+        print("\nConflictos disponibles:")
+        for i, conflicto in enumerate(self.conflictos, 1):
+            print(f"{i}. {conflicto}")
+        print("0. Escribir mi propio conflicto")
+
+        opcion = input("\nElige un número o escribe tu conflicto: ").strip()
+        if opcion.isdigit() and 1 <= int(opcion) <= len(self.conflictos):
+            conflicto = self.conflictos[int(opcion)-1]
+        else:
+            conflicto = opcion if opcion != "0" else input(
+                "Escribe tu conflicto: ").strip()
+
+        print("\nResoluciones disponibles:")
+        for i, resolucion in enumerate(self.resoluciones, 1):
+            print(f"{i}. {resolucion}")
+        print("0. Escribir mi propia resolución")
+
+        opcion = input("\nElige un número o escribe tu resolución: ").strip()
+        if opcion.isdigit() and 1 <= int(opcion) <= len(self.resoluciones):
+            resolucion = self.resoluciones[int(opcion)-1]
+        else:
+            resolucion = opcion if opcion != "0" else input(
+                "Escribe tu resolución: ").strip()
+
+        historia = f"""
+        Había una vez {personaje} que vivía {lugar}.
+        
+        Un día, mientras exploraba, encontró {objeto} que cambiaría su destino para siempre.
+        
+        Pronto descubrió que {conflicto}, y esta seria la aventura más grande de su vida.
+        
+        Después de muchas pruebas y desafíos, nuestro héroe logró su objetivo {resolucion}.
+        
+        Y así, {personaje} se convirtió en una leyenda, y su historia se contó durante generaciones.
+        
+        Fin de la historia.
+        """
+
+        return historia.strip()
+
 
 def main():
     """Función principal del programa"""
@@ -138,9 +220,10 @@ def main():
         print("3. Cambiar velocidad de voz")
         print("4. Ver voces disponibles")
         print("5. Cambiar voz")
-        print("6. Salir")
+        print("6. Crear mi propia historia")
+        print("7. Salir")
 
-        opcion = input("\n¿Qué te gustaría hacer? (1-6): ").strip()
+        opcion = input("\n¿Qué te gustaría hacer? (1-7): ").strip()
 
         if opcion == "1":
             print("\n🎲 Generando historia aleatoria...")
@@ -178,12 +261,17 @@ def main():
                 print("Por favor ingresa un número válido")
 
         elif opcion == "6":
+            print("\n🎨 Creando tu historia personalizada...")
+            historia = generador.crear_historia_personalizada()
+            generador.contar_historia(historia)
+
+        elif opcion == "7":
             print("¡Gracias por usar el Generador de Historias! 🌟")
             print("¡Que tengas aventuras mágicas! ✨")
             break
 
         else:
-            print("Opción no válida. Por favor elige un número del 1 al 6.")
+            print("Opción no válida. Por favor elige un número del 1 al 7.")
 
         # Pausa antes de mostrar el menú nuevamente
         input("\nPresiona Enter para continuar...")
